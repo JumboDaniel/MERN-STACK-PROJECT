@@ -1,0 +1,27 @@
+{
+  "name": "mern-stack-project",
+  "version": "1.0.0",
+  "description": "MERN STACK PROJECT",
+  "main": " s",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^1.19.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "react": "^16.13.1",
+    "react-bootstrap": "^0.32.4",
+    "react-router": "^4.3.1"
+  },
+  "scripts": {
+    "start": "nodemon -w server server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "babel src --out-dir public",
+    "watch": "babel src --out-dir public --watch --verbose"
+  },
+  "author": "Revival Daniel Jumbo",
+  "license": "MIT"
+}
