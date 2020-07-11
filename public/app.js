@@ -22,6 +22,24 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+var issues = [{
+  id: 1,
+  status: "New",
+  owner: "Revival",
+  effort: 5,
+  created: new Date('2018-08-15'),
+  due: undefined,
+  title: "Error in console when clicking add"
+}, {
+  id: 2,
+  status: "New",
+  owner: "Daniel",
+  effort: 14,
+  created: new Date('2018-08-16'),
+  due: undefined,
+  title: "Missing bottom border on panel"
+}];
+
 var IssueFilter = /*#__PURE__*/function (_React$Component) {
   _inherits(IssueFilter, _React$Component);
 
@@ -36,7 +54,7 @@ var IssueFilter = /*#__PURE__*/function (_React$Component) {
   _createClass(IssueFilter, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, "This is a placeholder");
+      return /*#__PURE__*/React.createElement("div", null, "This is a placeholder for the issue filter.");
     }
   }]);
 
@@ -56,7 +74,10 @@ var IssueRow = /*#__PURE__*/function (_React$Component2) {
 
   _createClass(IssueRow, [{
     key: "render",
-    value: function render() {}
+    value: function render() {
+      var issue = this.props.issue;
+      return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created.toDateString()), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due ? issue.due.toDateString() : ''), /*#__PURE__*/React.createElement("td", null, issue.title));
+    }
   }]);
 
   return IssueRow;
@@ -76,7 +97,15 @@ var IssueTable = /*#__PURE__*/function (_React$Component3) {
   _createClass(IssueTable, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "ID"), /*#__PURE__*/React.createElement("th", null, "Title"))), /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement(IssueRow, null), " ", /*#__PURE__*/React.createElement(IssueRow, null), " "));
+      var issueRow = issues.map(function (issue) {
+        return /*#__PURE__*/React.createElement(IssueRow, {
+          key: issue.id,
+          issue: issue
+        });
+      });
+      return /*#__PURE__*/React.createElement("table", {
+        className: "bordered-table"
+      }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "ID"), /*#__PURE__*/React.createElement("th", null, "Status"), /*#__PURE__*/React.createElement("th", null, "Owner"), /*#__PURE__*/React.createElement("th", null, "Created"), /*#__PURE__*/React.createElement("th", null, "Effort"), /*#__PURE__*/React.createElement("th", null, "Due Date"), /*#__PURE__*/React.createElement("th", null, "Title"))), /*#__PURE__*/React.createElement("tbody", null, issueRow));
     }
   }]);
 
@@ -97,7 +126,7 @@ var IssueAdd = /*#__PURE__*/function (_React$Component4) {
   _createClass(IssueAdd, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, "This is a placeholder for a table of issue");
+      return /*#__PURE__*/React.createElement("div", null, "This is a placeholder for a form to add an issue.");
     }
   }]);
 
@@ -125,4 +154,5 @@ var IssueList = /*#__PURE__*/function (_React$Component5) {
   return IssueList;
 }(React.Component);
 
-ReactDOM.render( /*#__PURE__*/React.createElement(IssueList, null), document.getElementById('contents'));
+var element = /*#__PURE__*/React.createElement(IssueList, null);
+ReactDOM.render(element, document.getElementById('contents'));

@@ -1,61 +1,88 @@
-class IssueFilter extends React.Component{
-        render(){
-                return(
-                        <div>This is a placeholder</div>
-                );
+const issues= [
+        {
+          id:1, status: "New", owner:"Revival", 
+          effort:5, created: new Date('2018-08-15'), due:undefined,
+          title:"Error in console when clicking add"
+        },
+        {
+          id:2, status:"New", owner:"Daniel", 
+          effort:14,created: new Date('2018-08-16'),  due:undefined,
+          title:"Missing bottom border on panel"
+        },
+      ];
+class IssueFilter extends React.Component {
+        render() {
+          return (
+            <div>This is a placeholder for the issue filter.</div>
+          );
         }
-}
-class IssueRow extends React.Component{        
-        render(){
-                const style= this.props.rowStyle;
-                return(
-                     <tr>
-                       <td style={style}>{this.props.issue_id}</td>
-                       <td style={style}>{this.props.issue_title}</td>
-                     </tr>
-                ) 
-         }
-}
-
-class IssueTable extends React.Component{
-        render(){
-            const style= {border: "4 solid black", padding:4}
-                return(
-                <table>
-                        <thead>
-                        <tr>
-                                <th style={style}>ID</th>
-                                <th style={style}>Title</th>
-                        </tr>      
-                        </thead>
-                        <tbody>
-                        <IssueRow rowStyle={style} issue_id={1} issue_title="error in console when clicking add"/> {/* somehow pass Issue 1 data to this */}
-                        <IssueRow rowStyle={style} issue_id={2} issue_title="Missing bottom border"/> {/* somehow pass Issue 1 data to this */}
-                        </tbody>            
-                </table>
-                );
-                
+      }
+      
+      class IssueRow extends React.Component {
+        render() {
+          const issue = this.props.issue;
+          return (
+            <tr>
+                <td>{issue.id}</td>
+                <td>{issue.status}</td>
+                <td>{issue.owner}</td>
+                <td>{issue.created.toDateString()}</td>
+                <td>{issue.effort}</td>
+                <td>{issue.due ? issue.due.toDateString() :'' }</td>
+                <td>{issue.title}</td>
+            </tr>
+          ); 
         }
-}
-
-class IssueAdd extends React.Component{
-        render(){
-                return(<div>This is a placeholder for a table of issue</div>);
+      }
+      
+      class IssueTable extends React.Component {
+        render() {
+          const issueRow = issues.map(issue=> <IssueRow key={issue.id} issue={issue}/>);
+          return (
+            <table className= "bordered-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Status</th>
+                  <th>Owner</th>
+                  <th>Created</th>
+                  <th>Effort</th>
+                  <th>Due Date</th>
+                  <th>Title</th>
+                </tr>
+              </thead>
+              <tbody>
+                {issueRow}
+              </tbody>
+            </table>
+          );
         }
-}
-
-class IssueList extends React.Component{
-        render(){
-                return(
-                        <React.Fragment>
-                                <h1>Issue Tracker</h1>
-                                <IssueFilter/>
-                                <hr/>
-                                <IssueTable/>
-                                <hr/>
-                                <IssueAdd/>
-                        </React.Fragment>
-                )
+      }
+      
+      class IssueAdd extends React.Component {
+        render() {
+          return (
+            <div>This is a placeholder for a form to add an issue.</div>
+          ); 
         }
-}
-        ReactDOM.render(<IssueList/>, document.getElementById('contents'));
+      }
+      
+      class IssueList extends React.Component {
+        render() {
+          return (
+            <React.Fragment>
+              <h1>Issue Tracker</h1>
+              <IssueFilter />
+              <hr />
+              <IssueTable />
+              <hr />
+              <IssueAdd />
+            </React.Fragment>
+          );
+        }
+      }
+      
+      const element = <IssueList />;
+      
+      ReactDOM.render(element, document.getElementById('contents'));
+      
